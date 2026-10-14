@@ -1,0 +1,35 @@
+CREATE TABLE SPORTS_CLUB(
+	Roll_No INT PRIMARY KEY,
+    Student_Name VARCHAR(50),
+    Year INT
+);
+
+CREATE TABLE MUSIC_CLUB (
+    Roll_No INT PRIMARY KEY,
+    Student_Name VARCHAR(50),
+    Year INT
+);
+
+INSERT INTO SPORTS_CLUB VALUES 
+(101, 'Alice', 2), (102, 'Bob', 3), (103, 'Charlie', 1);
+
+INSERT INTO MUSIC_CLUB VALUES 
+(102, 'Bob', 3), (103, 'Charlie', 1), (104, 'David', 4);
+
+SELECT Roll_No, Student_Name, Year
+FROM SPORTS_CLUB
+UNION
+SELECT Roll_No, Student_Name, Year
+FROM MUSIC_CLUB;
+
+SELECT Roll_No, Student_Name, Year
+FROM SPORTS_CLUB
+WHERE Roll_No IN (SELECT Roll_No FROM MUSIC_CLUB);
+
+SELECT Roll_No, Student_Name, Year 
+FROM SPORTS_CLUB 
+WHERE Roll_No NOT IN (SELECT Roll_No FROM MUSIC_CLUB);
+
+SELECT Roll_No, Student_Name, Year FROM SPORTS_CLUB WHERE Roll_No NOT IN (SELECT Roll_No FROM MUSIC_CLUB)
+UNION
+SELECT Roll_No, Student_Name, Year FROM MUSIC_CLUB WHERE Roll_No NOT IN (SELECT Roll_No FROM SPORTS_CLUB);
